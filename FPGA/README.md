@@ -12,7 +12,7 @@ These are essentially "cheat sheets of computing." They are designed with six in
 #### Flip-Flops (FFs)/Latches
 These are primitive storage devices, with each slice containing eight of them. Four are dedicated flip-flops (synchronous storage), while the other four can be configured as either standard flip-flops or latches (asynchronous storage).
 
-<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB Structure" width="500"/> </p>
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB Structure" width="700"/> </p>
 
 One CLB = 2 slices
 One slice = 4 LUTs + 8 FFs
