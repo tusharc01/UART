@@ -137,6 +137,7 @@ The provided sources and our conversation describe the internal architecture and
 
 This architecture provides significant flexibility, performance, and customization for developers designing applications with FPGAs.
 
+---
 
 ## FPGA Programming
 
