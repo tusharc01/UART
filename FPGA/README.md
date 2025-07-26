@@ -1,8 +1,3 @@
-# UART
-FPGA Implementation 
-
-
-
 ## FPGA: Internal Architecture and Key Components (Xilinx 7-Series Example)
 
 The Xilinx 7-series FPGAs are composed of several key components that enable their configurable nature and specialized functions:
