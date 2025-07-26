@@ -74,6 +74,24 @@ A DSP slice acts as a dedicated "math powerhouse" inside the FPGA, dramatically 
 
 BRAM is a dedicated type of memory found directly on the FPGA chip itself. It is distinct from other memory implementations, such as "distributed memory," which can be created using the Look-Up Tables (LUTs) within a Configurable Logic Block (CLB).
 
+<p align="center"> <img src="<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB Structure" width="700"/> </p>" width="700"/> </p>
+
+#### What Does This Figure Show?
+
+The diagram above illustrates the internal organization of a typical Xilinx 7-series BRAM hard block and highlights these key features:
+
+- **Dual-Port Architecture:**  
+  The figure shows two fully independent ports—Port A (top) and Port B (bottom)—each with its own address, data, write enable, enable, clock, and data out signals. This enables true dual-port access, meaning the memory block can handle two separate operations (read or write) at the same time, to different addresses.
+
+- **36Kb Memory Array:**  
+  At the center, the 36Kb Memory Array represents the actual available storage within each BRAM block.
+
+- **Cascade Connections:**  
+  Inputs and outputs labeled Cascade_inA/B (bottom) and Cascade_outA/B (top) allow multiple BRAM blocks to be connected or cascaded together. This provides a simple way to scale up the available memory across the FPGA by linking blocks for larger or more complex storage structures.
+
+- **Configurable Control Signals:**  
+  Each port provides independent Write Enable, Enable, and Clock signals, allowing great flexibility. This enables modes such as single-port RAM, true dual-port RAM, or ROM, as well as operating each port in its own clock domain.
+
 #### Key aspects of BRAM:
 
 - **Location and Purpose:** BRAM serves as dedicated memory on the chip, providing on-chip storage for data.
