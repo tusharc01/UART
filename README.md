@@ -1,7 +1,7 @@
 # UART
 FPGA Implementation 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ## FPGA: Internal Architecture and Key Components (Xilinx 7-Series Example)
 
