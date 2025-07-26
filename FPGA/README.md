@@ -10,7 +10,7 @@ These are the fundamental components of an FPGA, enabling the implementation of 
 These are essentially "cheat sheets of computing." They are designed with six inputs and two outputs and provide a predefined output for a given input, which helps speed up processing by avoiding computation.
 
 6-Input LUT Usage in FPGAs
-<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/LUT.jpg" alt="6-Input LUT Usage" width="50"/> </p>
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/LUT.jpg" alt="6-Input LUT Usage" width="700"/> </p>
 The diagrams above show how a single 6-input LUT can be used in two different ways to implement two functions at once, which increases the logic density of the FPGA.
 
 ### What Does the "Fracturable" 6-Input LUT Do?
@@ -50,7 +50,10 @@ This architecture provides significant flexibility for implementing logical func
 
 A DSP slice is a specialized hardware block in modern FPGAs, such as the Xilinx 7-series family. These slices are designed to efficiently perform complex arithmetic operations—multiplication, addition, accumulation, and more—which are fundamental for signal and image processing, communications, and many other high-speed data applications.
 
-<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/DSP_Schematic.png" alt="DSP Slice Schematic" width="700"/> </p>
+<p align="center">
+  <img src="https://github.com/tusharc01/UART/blob/main/FPGA/DSP_Schematic.png" alt="DSP Slice Schematic" width="700"/>
+</p>
+
 
 #### Key Features of DSP Slices
 
@@ -74,7 +77,10 @@ A DSP slice acts as a dedicated "math powerhouse" inside the FPGA, dramatically 
 
 BRAM is a dedicated type of memory found directly on the FPGA chip itself. It is distinct from other memory implementations, such as "distributed memory," which can be created using the Look-Up Tables (LUTs) within a Configurable Logic Block (CLB).
 
-<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/BRAM-hard-block.png" alt="BRAM-hard-block" width="700"/> </p>
+<p align="center">
+  <img src="https://github.com/tusharc01/UART/blob/main/FPGA/BRAM-hard-block.png" alt="BRAM Hard Block Schematic" width="200"/>
+</p>
+
 
 #### What Does This Figure Show?
 
