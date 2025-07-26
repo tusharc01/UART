@@ -27,7 +27,7 @@ The diagrams above show how a single 6-input LUT can be used in two different wa
 This "fracturable" capability is very efficient. Instead of using two separate, smaller LUTs to implement two small functions, the FPGA's synthesis tool can pack them into a single 6-input LUT. This leads to:
 
 - **Better Resource Utilization:** More functional logic per unit area, reducing the number of LUTs needed for complex designs.
-- **Potentially Better Performance:** Packing related logic together minimizes routing distances and delays, improving overall circuit speed[1][4][6].
+- **Potentially Better Performance:** Packing related logic together minimizes routing distances and delays, improving overall circuit speed.
 
 #### Flip-Flops (FFs)/Latches
 These are primitive storage devices, with each slice containing eight of them. Four are dedicated flip-flops (synchronous storage), while the other four can be configured as either standard flip-flops or latches (asynchronous storage).
