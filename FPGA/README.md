@@ -147,6 +147,8 @@ Programming an FPGA involves converting a high-level design description into a c
 
 Verilog (or VHDL) serves as the primary language for hardware modeling. HDLs allow designers to describe the behavior and structure of digital circuits with respect to time, supporting both concurrent and sequential operations. Verilog is particularly popular due to its C-like syntax and simplicity.
 
+*Note: The functional simulation part is skipped here, as the design functionality is assumed to be verified.*
+
 ### Logic Synthesis
 
 - The Verilog HDL code is then converted into an equivalent circuit as an interconnection of logic gates, a process known as Logic Synthesis. For FPGAs, this involves mapping the generic logic gates to the specific configurable components available on the FPGA chip.
