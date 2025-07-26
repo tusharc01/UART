@@ -9,6 +9,23 @@ These are the fundamental components of an FPGA, enabling the implementation of 
 #### Look-Up Tables (LUTs)
 These are essentially "cheat sheets of computing." They are designed with six inputs and two outputs and provide a predefined output for a given input, which helps speed up processing by avoiding computation.
 
+6-Input LUT Usage in FPGAs
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/LUT.jpg" alt="6-Input LUT Usage" width="500"/> </p>
+The diagrams above show how a single 6-input LUT can be used in two different ways to implement two functions at once, which increases the logic density of the FPGA.
+
+Left Diagram: Two 4-Input Functions:
+A single 6-input LUT can implement two separate 4-input logic functions, provided they share two inputs. The total number of unique inputs is 2 (orange) + 2 (green) + 2 (shared) = 6, which fits within the LUT's physical limit. The LUT can then produce two independent outputs.
+
+Right Diagram: Two 3-Input Functions:
+The same 6-input LUT implements two completely separate 3-input functions. Since the total number of inputs is 3 (orange) + 3 (green) = 6, no inputs need to be shared between the two functions.
+
+Why This Matters
+This "fracturable" capability is very efficient. Instead of using two separate, smaller LUTs to implement two small functions, the FPGA's synthesis tool can pack them into a single 6-input LUT. This leads to:
+
+Better Resource Utilization: More logic can be packed into the same amount of physical space on the FPGA chip.
+
+Potentially Better Performance: Keeping related logic physically close can reduce signal delays.
+
 #### Flip-Flops (FFs)/Latches
 These are primitive storage devices, with each slice containing eight of them. Four are dedicated flip-flops (synchronous storage), while the other four can be configured as either standard flip-flops or latches (asynchronous storage).
 
