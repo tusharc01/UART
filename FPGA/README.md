@@ -10,7 +10,7 @@ These are the fundamental components of an FPGA, enabling the implementation of 
 These are essentially "cheat sheets of computing." They are designed with six inputs and two outputs and provide a predefined output for a given input, which helps speed up processing by avoiding computation.
 
 6-Input LUT Usage in FPGAs
-<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/LUT.jpg" alt="6-Input LUT Usage" width="500"/> </p>
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/LUT.jpg" alt="6-Input LUT Usage" width="700"/> </p>
 The diagrams above show how a single 6-input LUT can be used in two different ways to implement two functions at once, which increases the logic density of the FPGA.
 
 ### What Does the "Fracturable" 6-Input LUT Do?
