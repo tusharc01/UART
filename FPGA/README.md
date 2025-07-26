@@ -74,7 +74,7 @@ A DSP slice acts as a dedicated "math powerhouse" inside the FPGA, dramatically 
 
 BRAM is a dedicated type of memory found directly on the FPGA chip itself. It is distinct from other memory implementations, such as "distributed memory," which can be created using the Look-Up Tables (LUTs) within a Configurable Logic Block (CLB).
 
-<p align="center"> <img src="<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB Structure" width="700"/> </p>" width="700"/> </p>
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/BRAM-hard-block.png" alt="BRAM-hard-block" width="700"/> </p>
 
 #### What Does This Figure Show?
 
