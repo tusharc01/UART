@@ -50,6 +50,8 @@ This architecture provides significant flexibility for implementing logical func
 
 A DSP slice is a specialized hardware block in modern FPGAs, such as the Xilinx 7-series family. These slices are designed to efficiently perform complex arithmetic operations—multiplication, addition, accumulation, and more—which are fundamental for signal and image processing, communications, and many other high-speed data applications.
 
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/DSP_Schematic.png" alt="DSP Slice Schematic" width="700"/> </p>
+
 #### Key Features of DSP Slices
 
 - **High-Speed Multiplier**: Core part of the slice, typically a 25x18-bit multiplier, enables rapid arithmetic operations essential for digital signal processing algorithms.
