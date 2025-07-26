@@ -12,6 +12,12 @@ These are essentially "cheat sheets of computing." They are designed with six in
 #### Flip-Flops (FFs)/Latches
 These are primitive storage devices, with each slice containing eight of them. Four are dedicated flip-flops (synchronous storage), while the other four can be configured as either standard flip-flops or latches (asynchronous storage).
 
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB Structure" width="500"/> </p>
+
+One CLB = 2 slices
+One slice = 4 LUTs + 8 FFs
+Therefore, one CLB = 8 LUTs + 16 FFs
+
 **Regarding "how much" are present, here's the breakdown within the Configurable Logic Block (CLB), which is the fundamental component of an FPGA:**
 
 - **Individual LUT Design:** Each individual Look-Up Table is designed with six inputs and two outputs. These inputs and outputs are independent, allowing the LUT to be implemented in various ways, such as a single 6-input function or two functions with five or fewer inputs.
