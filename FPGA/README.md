@@ -38,7 +38,13 @@ This "fracturable" capability is very efficient. Instead of using two separate, 
 #### Flip-Flops (FFs)/Latches
 These are primitive storage devices, with each slice containing eight of them. Four are dedicated flip-flops (synchronous storage), while the other four can be configured as either standard flip-flops or latches (asynchronous storage).
 
-<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB simplified" width="700"/> </p>
+<p align="center">
+  <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB_internal.png" alt="CLB Internal Structure" width="500"/>
+</p>
+
+<p align="center">
+  <em>Figure: Simplified Internal connections within a Xilinx 7-series CLB</em>
+</p>
 
 **Regarding "how much" are present, here's the breakdown within the Configurable Logic Block (CLB), which is the fundamental component of an FPGA:**
 
