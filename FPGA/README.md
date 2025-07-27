@@ -6,6 +6,12 @@ The Xilinx 7-series FPGAs are composed of several key components that enable the
 
 These are the fundamental components of an FPGA, enabling the implementation of virtually any logical functionality. Each CLB contains two slices, which can be either SLICEM or SLICEL. A typical CLB, therefore, consists of **8 Look-Up Tables (LUTs)** and **16 Flip-Flops (FFs)**, along with a network of carry logic and various multiplexers.
 
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB Structure" width="700"/> </p>
+
+One CLB = 2 slices
+One slice = 4 LUTs + 8 FFs
+Therefore, one CLB = 8 LUTs + 16 FFs
+
 #### Look-Up Tables (LUTs)
 These are essentially "cheat sheets of computing." They are designed with six inputs and two outputs and provide a predefined output for a given input, which helps speed up processing by avoiding computation.
 
@@ -32,11 +38,7 @@ This "fracturable" capability is very efficient. Instead of using two separate, 
 #### Flip-Flops (FFs)/Latches
 These are primitive storage devices, with each slice containing eight of them. Four are dedicated flip-flops (synchronous storage), while the other four can be configured as either standard flip-flops or latches (asynchronous storage).
 
-<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB Structure" width="700"/> </p>
-
-One CLB = 2 slices
-One slice = 4 LUTs + 8 FFs
-Therefore, one CLB = 8 LUTs + 16 FFs
+<p align="center"> <img src="https://github.com/tusharc01/UART/blob/main/FPGA/CLB.jpg" alt="CLB simplified" width="700"/> </p>
 
 **Regarding "how much" are present, here's the breakdown within the Configurable Logic Block (CLB), which is the fundamental component of an FPGA:**
 
