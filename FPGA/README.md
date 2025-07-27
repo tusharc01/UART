@@ -2,6 +2,15 @@
 
 The Xilinx 7-series FPGAs are composed of several key components that enable their configurable nature and specialized functions:
 
+<p align="center">
+  <img src="https://github.com/tusharc01/UART/blob/main/FPGA/fpga_overview.png" alt="FPGA Overview Diagram" width="500"/>
+</p>
+
+<p align="center">
+  <em>Figure: High-level overview of Xilinx 7-series FPGA internal architecture, including CLBs, routing channels, I/O blocks, DSP slices, and BRAM.</em>
+</p>
+
+
 ### Configurable Logic Blocks (CLBs)
 
 These are the fundamental components of an FPGA, enabling the implementation of virtually any logical functionality. Each CLB contains two slices, which can be either SLICEM or SLICEL. A typical CLB, therefore, consists of **8 Look-Up Tables (LUTs)** and **16 Flip-Flops (FFs)**, along with a network of carry logic and various multiplexers.
