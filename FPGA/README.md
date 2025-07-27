@@ -1,9 +1,14 @@
 ## FPGA: Internal Architecture and Key Components (Xilinx 7-Series Example)
 
 <p align="center">
-  <img src="https://github.com/tusharc01/UART/blob/main/FPGA/fpga_overview.png" alt="FPGA Overview Diagram" width="500"/>
+  <table>
+    <tr>
+      <td><img src="https://github.com/tusharc01/UART/blob/main/FPGA/fpga_overview.png" alt="FPGA Overview Diagram" width="500"/></td>
+      <td><img src="https://github.com/tusharc01/UART/blob/main/FPGA/FPGA.png" alt="FPGA Architecture Diagram" width="400"/></td>
+    </tr>
+  </table>
 </p>
-<p align="center">
+
   <em>Figure: High-level overview of Xilinx 7-series FPGA internal architecture, including CLBs, routing channels, I/O blocks, DSP slices, and BRAM.</em>
 </p>
 
