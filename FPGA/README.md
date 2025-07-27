@@ -1,15 +1,14 @@
 ## FPGA: Internal Architecture and Key Components (Xilinx 7-Series Example)
 
-The Xilinx 7-series FPGAs are composed of several key components that enable their configurable nature and specialized functions:
-
 <p align="center">
   <img src="https://github.com/tusharc01/UART/blob/main/FPGA/fpga_overview.png" alt="FPGA Overview Diagram" width="500"/>
 </p>
-
 <p align="center">
   <em>Figure: High-level overview of Xilinx 7-series FPGA internal architecture, including CLBs, routing channels, I/O blocks, DSP slices, and BRAM.</em>
 </p>
 
+
+The Xilinx 7-series FPGAs are composed of several key components that enable their configurable nature and specialized functions:
 
 ### Configurable Logic Blocks (CLBs)
 
@@ -43,6 +42,22 @@ This "fracturable" capability is very efficient. Instead of using two separate, 
 
 - **Better Resource Utilization:** More functional logic per unit area, reducing the number of LUTs needed for complex designs.
 - **Potentially Better Performance:** Packing related logic together minimizes routing distances and delays, improving overall circuit speed.
+
+##### SRAM Implementation of LUTs
+Look-Up Tables (LUTs) in FPGAs are typically implemented using Static Random Access Memory (SRAM). This SRAM acts as a small, reprogrammable memory block that stores predefined output values for every possible combination of input signals, allowing the LUT to function as a flexible logic element.
+
+###### How It Works
+A LUT essentially functions like a truth table: inputs serve as addresses to index into the SRAM, and the stored value at that address becomes the output.  
+For example, a 6-input LUT (common in modern FPGAs like Xilinx 7-series) uses 64 bits of SRAM (2^6 = 64) to hold all possible outcomes.  
+During FPGA configuration, the SRAM bits are programmed via a bitstream to define the logic function, such as AND, XOR, or more complex operations.
+
+This SRAM-based design is what makes LUTs reconfigurable and efficient for logic implementation, though it's distinct from other FPGA memory types like Block RAM (BRAM), which is also SRAM but dedicated to larger storage needs. If you're referring to a specific FPGA family (e.g., Xilinx 7-series), the same principle applies there too.
+
+- **SRAM's Role:** SRAM is a fundamental memory technology consisting of transistor-based cells (typically 6 transistors per bit) that store data stably as long as power is supplied. In FPGAs, it's used to make components reconfigurable.
+- **LUTs Use SRAM:** Each LUT relies on SRAM to store predefined output values for input combinations (e.g., a 6-input LUT uses 64 SRAM bits). This allows the LUT to be programmed for different logic operations.
+- **Not the Same Thing:** LUTs are higher-level logic elements built on top of SRAM, not the other way around.
+
+In some cases, you can repurpose LUTs to create "distributed RAM," which is a way to build tiny, scattered memory elements using the FPGA's logic fabric.
 
 #### Flip-Flops (FFs)/Latches
 These are primitive storage devices, with each slice containing eight of them. Four are dedicated flip-flops (synchronous storage), while the other four can be configured as either standard flip-flops or latches (asynchronous storage).
@@ -123,6 +138,18 @@ The diagram above illustrates the internal organization of a typical Xilinx 7-se
     - They can be cascaded together to form larger memory blocks when more storage is required.
 - **Functionality:** BRAM offers a variety of operational settings and can support special features like error correction.
 - **Addressability:** BRAM on an FPGA is not inherently limited to being byte-addressable, but it can be configured to be byte-addressable.
+
+##### SRAM Foundation of BRAM
+Block Random Access Memory (BRAM) in FPGAs is implemented using Static Random Access Memory (SRAM) cells, just like LUTs. This SRAM-based design allows BRAM to be fast, reconfigurable, and integrated directly into the FPGA fabric for on-chip data storage.
+
+###### Key Details
+BRAM consists of arrays of SRAM bits organized into a dual-port memory structure (e.g., 36Kb per block in Xilinx 7-series). These SRAM cells store data in a volatile manner, meaning the contents are lost when power is removed, but they can be quickly written to and read from during operation.
+
+- **Why SRAM?** It provides high-speed access, low latency, and easy reconfiguration, which aligns with the programmable nature of FPGAs. Unlike external DRAM, BRAM's SRAM is embedded and optimized for parallel access within the device.
+- **Comparison to LUTs:** While LUTs use small SRAM arrays (e.g., 64 bits for a 6-input LUT) to implement logic functions via truth tables, BRAM uses much larger SRAM arrays for general-purpose memory storage, such as buffers, FIFOs, or lookup tables in your design.
+
+BRAM is a dedicated, larger block of SRAM designed specifically for efficient memory storage (e.g., 36Kb per block in Xilinx 7-series). It's not built from LUTs; instead, it's a separate, optimized hardware component in the FPGA architecture for handling bigger data buffers, FIFOs, or arrays without wasting logic resources.  
+This separation is key for performance—using BRAM for memory-intensive tasks is way more efficient than trying to cobble together something similar from LUTs alone. Similarly, as discussed, BRAM (a larger dedicated SRAM block) is also not made from LUTs—it's a separate SRAM-based resource optimized for memory storage.
 
 ### Input/Output (IO) Blocks and Transceivers
 
