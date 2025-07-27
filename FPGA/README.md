@@ -235,8 +235,6 @@ The synthesized schematic in Vivado shows muxes as distinct blocks initially (in
 
 Muxes are generic during synthesis but get technology-specific implementations later. In FPGAs, they don't "break down" into gates like in ASICs; instead, they are efficiently realized in LUTs, which are ideal for selection logic due to their truth-table nature. This mapping happens automatically, ensuring no direct hardware mux is needed—the LUT emulates it perfectly.
 
-If this relates to a specific part of your UART or combination lock project (e.g., muxes in state machines), or if you want a Verilog example of mux inference, let me know for more details!
-
 ### Placement And Routing
 
 Yes, in the context of an FPGA, the placement and routing parts are indeed done automatically by the specialized Electronic Design Automation (EDA) tools.
