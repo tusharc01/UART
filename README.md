@@ -109,3 +109,24 @@ This is essential because UART communication is asynchronous and relies on these
 
 This LSB-first sequence is standard for UART communication, helping the receiver to reconstruct the original parallel data correctly.
 
+
+
+### Advantages and Disadvantages of UART
+
+No communication protocol is perfect, but UARTs are pretty good at what they do. Here are some pros and cons to help you decide whether or not they fit the needs of your project:
+
+## Advantages
+
+- Only uses two wires
+- No clock signal is necessary
+- Has a parity bit to allow for error checking
+- The structure of the data packet can be changed as long as both sides are configured for it
+- Well documented and widely used method
+
+## Disadvantages
+
+- The size of the data frame is limited to a maximum of 9 bits
+- Doesn’t support multiple slave or multiple master systems
+- The baud rates of each UART must be within 10% of each other
+
+
