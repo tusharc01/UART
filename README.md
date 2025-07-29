@@ -40,7 +40,7 @@ Note: **Synchronous transmission** uses a clock signal to keep both sides precis
 
 Here is the exact text formatted as a README section, preserving the original content exactly as you requested:
 
-# UART Baud Rate and Data Packet Configuration
+### UART Baud Rate and Data Packet Configuration
 
 When the receiving UART detects a start bit, it starts to read the incoming bits at a specific frequency known as the baud rate. Baud rate is a measure of the speed of data transfer, expressed in bits per second (bps). Both UARTs must operate at about the same baud rate. The baud rate between the transmitting and receiving UARTs can only differ by about 10% before the timing of bits gets too far off. Both UARTs must also must be configured to transmit and receive the same data packet structure.
 
