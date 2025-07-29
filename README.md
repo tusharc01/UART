@@ -115,7 +115,7 @@ This LSB-first sequence is standard for UART communication, helping the receiver
 
 No communication protocol is perfect, but UARTs are pretty good at what they do. Here are some pros and cons to help you decide whether or not they fit the needs of your project:
 
-## Advantages
+**Advantages**
 
 - Only uses two wires
 - No clock signal is necessary
@@ -123,7 +123,7 @@ No communication protocol is perfect, but UARTs are pretty good at what they do.
 - The structure of the data packet can be changed as long as both sides are configured for it
 - Well documented and widely used method
 
-## Disadvantages
+**Disadvantages**
 
 - The size of the data frame is limited to a maximum of 9 bits
 - Doesn’t support multiple slave or multiple master systems
