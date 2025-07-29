@@ -105,7 +105,7 @@ This is essential because UART communication is asynchronous and relies on these
 | >115200 baud      | Possible with advanced hardware & setup|
 
 
-In UART serial transmission, the data bits within a byte are sent **least significant bit (LSB) first**, meaning bit 0 (the lowest order bit) is transmitted first, then bit 1, bit 2, and so on up to bit 7 (for an 8-bit data frame). This order is part of the data frame sent after the start bit.
+**Note:** In UART serial transmission, the data bits within a byte are sent **least significant bit (LSB) first**, meaning bit 0 (the lowest order bit) is transmitted first, then bit 1, bit 2, and so on up to bit 7 (for an 8-bit data frame). This order is part of the data frame sent after the start bit.
 
 This LSB-first sequence is standard for UART communication, helping the receiver to reconstruct the original parallel data correctly.
 
