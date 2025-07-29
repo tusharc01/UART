@@ -77,3 +77,31 @@ If the UARTs differ—for example, one uses 7 data bits with parity and the othe
 In summary, "same data packet structure" means matching the frame format parameters so both UARTs agree on how to package and interpret the serial data bits.
 
 This is essential because UART communication is asynchronous and relies on these agreed protocols to frame the serial data correctly without a shared clock.
+
+
+### Maximum Speed for UART
+- UART baud rates commonly range from low speeds like **300 baud** up to **115200 baud** or higher.
+- **115200 baud** (bits per second) is widely considered a practical maximum speed for many standard UART implementations on microcontrollers and serial devices.
+- Some high-performance UART hardware can support speeds beyond 115200 baud, even up to 1 Mbps or more, but this depends on the device capabilities and signal quality.
+
+**Typical Use Speeds**
+- **9600 baud** is one of the most common default UART speeds—often used for simple serial communication because it balances speed and reliability.
+- Lower speeds (like 1200, 2400, 4800, etc.) are also common, especially in older devices or long cable runs.
+- Higher speeds (e.g., 57600, 115200 baud) are common when more data throughput is required, and the communication medium supports it.
+
+**Notes about Maximum Speed Limits**
+- The maximum achievable baud rate depends on:
+  - The hardware UART module capability.
+  - The quality of the wiring and electrical environment (noise, cable length).
+  - The microcontroller or device clock accuracy and configuration.
+  - The UART driver or software timing precision.
+- When increasing the baud rate, error rates may increase unless all hardware and connections are optimal.
+
+**Summary**
+| Baud Rate         | Typical Usage                            |
+|-------------------|----------------------------------------|
+| 9600 baud         | Common default speed for many devices  |
+| 115200 baud       | Common maximum practical speed          |
+| >115200 baud      | Possible with advanced hardware & setup|
+
+
