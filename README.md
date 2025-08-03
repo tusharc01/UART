@@ -111,6 +111,48 @@ This LSB-first sequence is standard for UART communication, helping the receiver
 
 
 
+
+### ❓ Does UART require a clock to operate?
+
+Yes, you can absolutely say that **UART requires a clock to operate**, but it's important to clarify the nuance of **"clock"** in this context.
+Here's a breakdown:
+
+
+
+**1. UART is asynchronous – no shared clock signal**
+
+Unlike synchronous protocols like **SPI** or **I2C**, UART does **not transmit a separate clock signal** along with the data.
+This means the transmitter and receiver do **not share a common clock line** to synchronize their operations,
+according to *Pantech.AI*.
+
+
+**2. Each UART has an internal clock**
+
+However, both the **transmitting** and **receiving** UART devices do have their own **internal clock circuits**,
+according to *Analog Devices*.
+These internal clocks are used to **generate and interpret the bit stream** based on the agreed-upon **baud rate**.
+
+
+**3. Baud rate and synchronization**
+
+Instead of a shared clock, UART relies on both the transmitter and receiver being **configured to the same baud rate**,
+according to *Analog Devices*.
+
+* The **baud rate** defines the number of bits transmitted per second.
+* The **receiver uses its internal clock** and the **start bit** to synchronize its sampling with the incoming data stream,
+  according to *Pantech.AI*.
+* It **samples the data line** at precise intervals determined by the baud rate to capture each bit correctly.
+
+
+**Summary**
+
+> UART relies on **internal clocks within each device** and a **pre-agreed baud rate** to achieve synchronization
+> and successful data transfer.
+> So, while it doesn't use an **external, shared clock signal** like some other serial protocols,
+> **internal clocks are essential** for its operation.
+
+
+
 ### Advantages and Disadvantages of UART
 
 No communication protocol is perfect, but UARTs are pretty good at what they do. Here are some pros and cons to help you decide whether or not they fit the needs of your project:
