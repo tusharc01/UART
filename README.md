@@ -174,7 +174,7 @@ No communication protocol is perfect, but UARTs are pretty good at what they do.
 ---
 
 
-### UART Implementation
+# UART Implementation
 
 
 This UART design is broken down into three main Verilog modules: a **transmitter (`uart_tx`)**, a **receiver (`uart_rx`)**, and a **top-level module (`uart_top`)** that connects them. The design is fully synchronous, using a single clock, and is parameterized to allow for different baud rates.
@@ -216,7 +216,7 @@ The receiver also uses a four-state FSM. The key challenge for the receiver is t
 4.  **`STOP` State**: After receiving 8 data bits, the FSM expects a stop bit (logic '1'). It waits for one final bit period. Upon completion, it asserts the `Data_Valid` signal for one bit period to indicate that a new, valid byte is available on the `Rx_Byte` output. The FSM then returns to the `IDLE` state to wait for the next frame.
 
 
-
+---
 
 In this Verilog design, the **baud rate** is not set directly with a single number like "50" or "9600". Instead, it is **indirectly defined** by the relationship between the system's input clock frequency and a parameter called `CLKS_PER_BIT`.
 
