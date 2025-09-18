@@ -171,4 +171,112 @@ No communication protocol is perfect, but UARTs are pretty good at what they do.
 - Doesn’t support multiple slave or multiple master systems
 - The baud rates of each UART must be within 10% of each other
 
+---
+
+
+### UART Implementation
+
+
+This UART design is broken down into three main Verilog modules: a **transmitter (`uart_tx`)**, a **receiver (`uart_rx`)**, and a **top-level module (`uart_top`)** that connects them. The design is fully synchronous, using a single clock, and is parameterized to allow for different baud rates.
+
+
+## **UART Transmitter (`uart_tx`)**
+
+
+
+The transmitter's job is to take a parallel 8-bit byte and send it out serially, bit-by-bit, following the standard UART frame format. I've implemented this using a simple four-state finite state machine (FSM).
+
+### **States and Operation**
+
+1.  **`IDLE` State**: This is the default state. The serial output `Tx_Serial` is held high (logic '1'), which is the mark state. The FSM waits for the `Tx_Start` signal to go high. When it does, the FSM latches the input `Tx_Byte` into an internal register, asserts the `Tx_Active` signal to indicate transmission is in progress, and moves to the `START` state.
+
+2.  **`START` State**: In this state, the FSM generates the **start bit**. It pulls the `Tx_Serial` line low (logic '0') for one full bit period. The duration of this period is determined by the `CLKS_PER_BIT` parameter. An internal counter, `r_Clk_Count`, is used to count the system clock cycles to ensure the bit timing is precise.
+
+3.  **`DATA` State**: After the start bit, the FSM begins transmitting the 8 data bits, starting from the least significant bit (LSB). For each bit, `Tx_Serial` is set to the value of the current data bit. The FSM holds this value for one bit period. After each bit is sent, an index counter, `r_Bit_Index`, is incremented to move to the next bit. This process repeats until all 8 bits have been transmitted.
+
+4.  **`STOP` State**: Once all data bits are sent, the FSM generates the **stop bit**. It drives the `Tx_Serial` line high for one bit period. After this, it de-asserts `Tx_Active`, asserts the `Tx_Done` signal for one bit period to signal the completion of the transfer, and returns to the `IDLE` state to await the next transmission.
+
+
+## **UART Receiver (`uart_rx`)**
+
+
+
+The receiver's function is the inverse of the transmitter. It listens on the serial input line for an incoming UART frame, receives the bits, and reassembles them into an 8-bit parallel byte.
+
+### **Operation and Sampling**
+
+The receiver also uses a four-state FSM. The key challenge for the receiver is to sample the incoming serial line at the correct time to reliably read the value of each bit.
+
+1.  **`IDLE` State**: The receiver waits for a start bit, which is detected by a high-to-low transition on the `Rx_Serial` line.
+
+2.  **`START` State**: Once a potential start bit is detected, the receiver doesn't immediately trust it. Instead, it waits for half a bit period—`(CLKS_PER_BIT - 1) / 2` clock cycles—and then samples the `Rx_Serial` line again. This **mid-bit sampling** ensures that the receiver is reading the value in the middle of the bit period, which is the most stable point and avoids errors due to timing skew between the transmitter and receiver. If the line is still low, the start bit is considered valid, and the FSM transitions to the `DATA` state. If not, it was a glitch, and it returns to `IDLE`.
+
+3.  **`DATA` State**: The receiver now proceeds to sample the 8 data bits. It waits for one full bit period, samples the line at the midpoint, and stores the value in the corresponding position of an internal `r_Rx_Byte` register. This process is repeated for all 8 bits, from LSB to MSB.
+
+4.  **`STOP` State**: After receiving 8 data bits, the FSM expects a stop bit (logic '1'). It waits for one final bit period. Upon completion, it asserts the `Data_Valid` signal for one bit period to indicate that a new, valid byte is available on the `Rx_Byte` output. The FSM then returns to the `IDLE` state to wait for the next frame.
+
+
+
+
+In this Verilog design, the **baud rate** is not set directly with a single number like "50" or "9600". Instead, it is **indirectly defined** by the relationship between the system's input clock frequency and a parameter called `CLKS_PER_BIT`.
+
+You can find it on the very first line of both the `uart_tx` and `uart_rx` modules:
+
+```verilog
+module uart_tx
+  #(parameter CLKS_PER_BIT = 2000000) // <-- Right here
+  (
+  ...
+```
+
+### How the Calculation Works
+
+The core principle is that all timing in a synchronous digital circuit must be derived from its main clock. The baud rate is a measure of bits per second, so we need to figure out how many clock cycles correspond to the time duration of a single bit.
+
+The formula is:
+
+**Baud Rate = System Clock Frequency / `CLKS_PER_BIT`**
+
+Let's use the example from your code's comment: you want a **50 baud** rate with a **100 MHz** system clock.
+
+1.  **System Clock Frequency:** 100 MHz = 100,000,000 cycles per second.
+2.  **Desired Baud Rate:** 50 bits per second.
+3.  **Calculate `CLKS_PER_BIT`:**
+      * `CLKS_PER_BIT` = (100,000,000 cycles/sec) / (50 bits/sec)
+      * `CLKS_PER_BIT` = 2,000,000 cycles per bit.
+
+This is exactly the value set in your parameter.
+
+### How It's Used in the Logic
+
+Inside the state machine, a counter (`r_Clk_Count`) is used to measure the duration of each bit.
+
+In the `START`, `DATA`, and `STOP` states, you'll see this logic:
+
+```verilog
+if (r_Clk_Count < CLKS_PER_BIT-1)
+  begin
+    r_Clk_Count <= r_Clk_Count + 1; // Keep waiting in the same bit
+    ...
+  end
+else
+  begin
+    r_Clk_Count <= 0; // Reset for the next bit
+    // Move to the next state or the next bit
+    ...
+  end
+```
+
+This code block effectively makes the state machine wait for `2,000,000` clock cycles before moving on, ensuring that the serial line is held at the correct value for the exact time required by the 50 baud rate.
+
+### Why It's Implemented This Way
+
+This approach is standard practice for a few important reasons:
+
+1.  **Flexibility:** The module is now generic. To change the baud rate to 9600, you would simply recalculate `CLKS_PER_BIT` (`100,000,000 / 9600 ≈ 10417`) and change the parameter value when you instantiate the module.
+2.  **Portability:** You can use this same UART module in a different project with a different system clock (e.g., 50 MHz) without changing the core logic. You would only need to update the `CLKS_PER_BIT` parameter to match the new clock frequency.
+
+## **Top-Level Module (`uart_top`)**
+
+The top-level module is straightforward. It instantiates both the transmitter and the receiver. The `Tx_Serial` output of the transmitter is connected directly to the `Rx_Serial` input of the receiver via an internal wire. This creates a simple loopback configuration, which is very useful for testing the design on an FPGA. The module's inputs and outputs are simply passed through to the respective ports of the transmitter and receiver instances.
 
